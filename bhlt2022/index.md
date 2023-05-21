@@ -5,7 +5,9 @@ title: Estonian TTS with non-autoregressive Transformers
 
 # Estonian TTS with non-autoregressive Transformers
 
-**Paper:** TBA
+**Paper:** [PDF](https://doi.org/10.22364/bjmc.2022.10.3.17)
+
+**Web demo:** [Neurokõne](https://neurokone.ee/)
 
 **Authors:** Liisa Rätsep, Rasmus Lellep, Mark Fishel
 
