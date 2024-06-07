@@ -54,7 +54,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00012.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00012.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00012.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00012.wav?raw=true"  controls preload></audio></td>
@@ -82,7 +82,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00025.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00025.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00025.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00025.wav?raw=true"  controls preload></audio></td>
@@ -110,7 +110,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00031.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00031.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00031.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00031.wav?raw=true"  controls preload></audio></td>
@@ -138,7 +138,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00040.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00040.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00040.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00040.wav?raw=true"  controls preload></audio></td>
@@ -166,7 +166,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00059.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00059.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00059.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00059.wav?raw=true"  controls preload></audio></td>
@@ -194,7 +194,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00085.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00085.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00085.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00085.wav?raw=true"  controls preload></audio></td>
@@ -222,7 +222,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00135.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00135.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00135.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00135.wav?raw=true"  controls preload></audio></td>
@@ -250,7 +250,7 @@ can provide valuable insights for future low-resource research and efforts in pr
     <td><audio src="files/mix-ft/EKI-voru-Sulev_Voru_Sulev_eki_et_adp_00149.wav?raw=true"  controls preload></audio></td>
   </tr>
   <tr>
-    <td>Lee</td>
+    <td>Hellä</td>
     <td><audio src="files/gt/EKI-voru-Hella_Voru_Hella_eki_et_hll_00149.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/gt-voc/EKI-voru-Hella_Voru_Hella_eki_et_hll_00149.wav?raw=true"  controls preload></audio></td>
     <td><audio src="files/single/EKI-voru-Hella_Voru_Hella_eki_et_hll_00149.wav?raw=true"  controls preload></audio></td>
