@@ -1,8 +1,6 @@
 from typing import Union
 import re
 
-from phonemizer.phonemize import phonemize
-
 from data.text.symbols import all_phonemes, _punctuations, gst_tokens
 
 
@@ -83,6 +81,7 @@ class Phonemizer:
         if not language:
             phonemes = text
         else:
+            from phonemizer.phonemize import phonemize
             phonemes = phonemize(text,
                                  language=language,
                                  backend='espeak',
