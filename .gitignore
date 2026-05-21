@@ -1,6 +1,8 @@
 ## CUSTOM
 samples
 .idea
+.vscode
+.scripts
 *.pkl
 *.hdf5
 .DS_Store

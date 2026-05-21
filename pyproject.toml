@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transformer_tts"
+dynamic = ["version"]
+description = "Implementation of a non-autoregressive Transformer based neural network for Text-to-Speech."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+maintainers = [{name = "University of Tartu", email = "ping@tartunlp.ai"}]
+requires-python = ">=3.9, <3.14"
+dependencies = [
+    "tensorflow >=2.20, <=2.21", # 2.21 is the latest version at the time of release
+    "ruamel.yaml",
+    "numpy"
+]
+
+[project.scripts]
+"transformer-tts" = "transformer_tts.cli:main"
+
+[project.optional-dependencies]
+gpu = ["tensorflow[and-cuda] >=2.20, <=2.21 ; platform_system == 'Linux'"]
+train = [
+    "tensorflow[and-cuda] >=2.20, <=2.21 ; platform_system == 'Linux'",
+    "tensorboard",
+    "librosa",
+    "matplotlib",
+    "tqdm",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "transformer_tts.version.__version__"}

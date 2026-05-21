@@ -1,0 +1,9 @@
+name: tts-train
+dependencies:
+  - python=3.13
+  - ipykernel # for notebooks only
+  - ipywidgets
+  - pip
+  # - pip:
+  #   - tensorflow[and-cuda]==2.21.0
+  #   - -e ./[train]
