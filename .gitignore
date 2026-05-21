@@ -1,6 +1,8 @@
 ## CUSTOM
 samples
 .idea
+.vscode
+.scripts
 *.pkl
 *.hdf5
 .DS_Store
@@ -142,3 +144,7 @@ vocoding/
 # docs
 _site/
 .jekyll-cache/
+
+# custom configuration and test files
+config/*.*.yaml
+test_files/*.*.txt
