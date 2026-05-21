@@ -1,21 +1,9 @@
-channels:
-  - conda-forge
-  - anaconda
+name: tts-train
 dependencies:
-  - python==3.8
-  - matplotlib==3.2.2
-  - librosa==0.7.1
-  - numba==0.48
-  - numpy==1.17.4
-  - ruamel.yaml==0.16.6
-  - cudnn
-  - tqdm==4.42.1
-  - pysoundfile
-  - scipy
+  - python=3.13
+  - ipykernel # for notebooks only
+  - ipywidgets
   - pip
-  - pip:
-      - tensorflow-gpu==2.5.0
-      - webrtcvad
-      - p_tqdm
-      - pyworld
-      - phonemizer==2.2.1
+  # - pip:
+  #   - tensorflow[and-cuda]==2.21.0
+  #   - -e ./[train]

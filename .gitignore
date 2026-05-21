@@ -1,6 +1,8 @@
 ## CUSTOM
 samples
 .idea
+.vscode
+.scripts
 *.pkl
 *.hdf5
 .DS_Store
@@ -137,4 +139,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/vocoding/
+vocoding/
+
+# docs
+_site/
+.jekyll-cache/
+
+# custom configuration and test files
+config/*.*.yaml
+test_files/*.*.txt

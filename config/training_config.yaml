@@ -1,0 +1,62 @@
+# DATASET AND SPEAKER SETTINGS
+dataset:
+  multispeaker: null  # type of multispeaker approach (GST or embedding), use null to disable multispeaker support
+  n_speakers: 1  # how many speaker tokens are reserved in the model
+  n_languages: 1
+  alphabet: null  # set the alphabet to use for tokenization, a default one is used if null.
+  
+# AUDIO SETTINGS
+audio_settings:
+  sampling_rate: 22050
+  n_fft: 1024
+  mel_channels: 80
+  hop_length: 256
+  win_length: 1024
+  f_min: 0
+  f_max: 8000
+
+model_settings:
+  # ARCHITECTURE
+  decoder_model_dimension: 384
+  encoder_model_dimension: 384
+  decoder_num_heads: [2, 2, 2, 2, 2, 2]  # the length of this defines the number of layers
+  encoder_num_heads: [2, 2, 2, 2, 2, 2]  # the length of this defines the number of layers
+  encoder_feed_forward_dimension: null
+  decoder_feed_forward_dimension: null
+  encoder_attention_conv_filters: [1536, 384]
+  decoder_attention_conv_filters: [1536, 384]
+  encoder_attention_conv_kernel: 3
+  decoder_attention_conv_kernel: 3
+  encoder_max_position_encoding: 2000
+  decoder_max_position_encoding: 10000
+  encoder_dense_blocks: 0
+  decoder_dense_blocks: 0
+  transposed_attn_convs: True  # if True, convolutions after MHA are over time.
+  use_layernorm: True  # use False for older models
+
+  # STATS PREDICTORS ARCHITECTURE
+  duration_conv_filters: [256, 226]
+  pitch_conv_filters: [256, 226]
+  duration_kernel_size: 3
+  pitch_kernel_size: 3
+
+  # TRAINING
+  predictors_dropout: 0.1
+  dropout_rate: 0.1
+  learning_rate_schedule:
+    - [0, 1.0e-4]
+  max_steps: 500_000
+  debug: False
+  bucket_boundaries: [200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200] # mel bucketing
+  bucket_batch_sizes: [192, 126, 96, 75, 63, 54, 48, 42, 36, 18, 1]
+  val_bucket_batch_size: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1]
+  gradient_accumulation_steps: 4
+
+  # LOGGING
+  validation_frequency: 5_000
+  prediction_frequency: 5_000
+  weights_save_frequency: 5_000
+  train_images_plotting_frequency: 1_000
+  keep_n_weights: 5
+  n_steps_avg_losses: [100, 500, 1_000, 5_000]  # command line display of average loss values for the last n steps
+  prediction_start_step: 4_000

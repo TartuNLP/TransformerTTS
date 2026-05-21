@@ -1,222 +1,214 @@
-<p align="center">
-    <br>
-    <img src="https://raw.githubusercontent.com/as-ideas/TransformerTTS/master/docs/transformer_logo.png" width="400"/>
-    <br>
-</p>
+# Transformer-based Text-to-Speech in TensorFlow 2
 
-<h2 align="center">
-<p>A Text-to-Speech Transformer in TensorFlow 2</p>
-</h2>
+Implementation of a non-autoregressive Transformer-based neural network for Text-to-Speech (TTS).
 
-Implementation of a non-autoregressive Transformer based neural network for Text-to-Speech (TTS). <br>
-This repo is based, among others, on the following papers:
+This is repository is managed by [TartuNLP](https://tartunlp.ai), and it is a fork of the implementation
+by [Axel Springer](https://github.com/as-ideas/TransformerTTS). Our contributions compared to the original repository
+are:
+
+- Support for grapheme-based synthesis
+- Multi-speaker synthesis
+- [Pretrained models](https://github.com/TartuNLP/TransformerTTS/releases) for Estonian
+- Open source TTS applications:
+  - [API](https://github.com/TartuNLP/text-to-speech-api)
+      \+ [worker](https://github.com/TartuNLP/text-to-speech-worker) combo.
+- Numerous minor changes to streamline training and make the repository easier to use with new datasets.
+
+When using this repository or models for research, please cite the following paper:
+
+```bibtex
+@article{R2tsep_2022,
+  title = {Estonian Text-to-Speech Synthesis with Non-autoregressive Transformers},
+  author = {Liisa R\"{a}tsep and Rasmus Lellep and Mark Fishel},
+  journal = {Baltic Journal of Modern Computing}
+  volume = {10},
+  number = {3},
+  year = 2022 
+}
+```
+
+The original code is based, among others, on the following papers:
+
 - [Neural Speech Synthesis with Transformer Network](https://arxiv.org/abs/1809.08895)
 - [FastSpeech: Fast, Robust and Controllable Text to Speech](https://arxiv.org/abs/1905.09263)
 - [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558)
 - [FastPitch: Parallel Text-to-speech with Pitch Prediction](https://fastpitch.github.io/)
 
-Our pre-trained LJSpeech model is compatible with the pre-trained vocoders:
+The models are compatible with the pre-trained vocoders:
+
 - [MelGAN](https://github.com/seungwonpark/melgan)
 - [HiFiGAN](https://github.com/jik876/hifi-gan)
+- [Speechbrain HiFiGAN](https://huggingface.co/speechbrain/tts-hifigan-libritts-22050Hz)
 
-(older versions are available also for [WaveRNN](https://github.com/fatchord/WaveRNN))
-
-For quick inference with these vocoders, checkout the [Vocoding branch](https://github.com/as-ideas/TransformerTTS/tree/vocoding)
-
-#### Non-Autoregressive
 Being non-autoregressive, this Transformer model is:
+
 - Robust: No repeats and failed attention modes for challenging sentences.
 - Fast: With no autoregression, predictions take a fraction of the time.
 - Controllable: It is possible to control the speed and pitch of the generated utterance.
 
 ## 🔈 Samples
 
-[Can be found here.](https://as-ideas.github.io/TransformerTTS/)
+Estonian and multispeaker samples can be found [on the samples page](https://tartunlp.github.io/TransformerTTS/).
 
-These samples' spectrograms are converted using the pre-trained [MelGAN](https://github.com/seungwonpark/melgan) vocoder.<br>
-
-
-Try it out on Colab:
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/as-ideas/TransformerTTS/blob/main/notebooks/synthesize_forward_melgan.ipynb)
+Samples from the original implementation can be found [on the original samples page](https://tartunlp.github.io/TransformerTTS/original).
 
 ## Updates
-- 06/20: Added normalisation and pre-trained models compatible with the faster [MelGAN](https://github.com/seungwonpark/melgan) vocoder.
-- 11/20: Added pitch prediction. Autoregressive model is now specialized as an Aligner and Forward is now the only TTS model. Changed models architectures. Discontinued WaveRNN support. Improved duration extraction with Dijkstra algorithm.
+
+- 05/26: Made into installable library and added a CLI (TartuNLP)
+- 06/22: Multi-speaker synthesis (TartuNLP)
+- 05/22: Merged updates from the original repository (TartuNLP)
+- 06/21: Grapheme-based synthesis and Estonian models (TartuNLP)
+- 06/20: Added normalisation and pre-trained models compatible with the
+  faster [MelGAN](https://github.com/seungwonpark/melgan) vocoder.
+- 11/20: Added pitch prediction. Autoregressive model is now specialized as an Aligner and Forward is now the only TTS
+  model. Changed models architectures. Discontinued WaveRNN support. Improved duration extraction with Dijkstra
+  algorithm.
 - 03/20: Vocoding branch.
 
 ## 📖 Contents
+
 - [Installation](#installation)
-- [API](#pre-trained-ljspeech-api)
 - [Dataset](#dataset)
 - [Training](#training)
-    - [Aligner](#train-aligner-model)
-    - [TTS](#train-tts-model)
+  - [Aligner](#train-aligner-model)
+  - [TTS](#train-tts-model)
 - [Prediction](#prediction)
 - [Model Weights](#model-weights)
 
 ## Installation
 
-Make sure you have:
+The repository can be installed with pip:
 
-* Python >= 3.6
-
-Install espeak as phonemizer backend (for macOS use brew):
-```
-sudo apt-get install espeak
+```bash
+pip install git+https://github.com/TartuNLP/TransformerTTS.git
 ```
 
-Then install the rest with pip:
-```
-pip install -r requirements.txt
-```
+For a specific version, the tag name:
 
-Read the individual scripts for more command line arguments.
-
-## Pre-Trained LJSpeech API
-Use our pre-trained model (with Griffin-Lim) from command line with
-```commandline
-python predict_tts.py -t "Please, say something."
-```
-Or in a python script
-```python
-from data.audio import Audio
-from model.factory import tts_ljspeech
-
-model, config = tts_ljspeech()
-audio = Audio(config)
-out = model.predict('Please, say something.')
-
-# Convert spectrogram to wav (with griffin lim)
-wav = audio.reconstruct_waveform(out['mel'].numpy().T)
+```bash
+pip install git+https://github.com/TartuNLP/TransformerTTS.git@v2.0.0
 ```
 
-<b>IMPORTANT:</b> make sure to checkout the correct repository version to use the API.<br>
-Currently c6d5775e549666e2461054d89002bef680fe2f09
+or locally from the source code:
+
+```bash
+git clone https://github.com/TartuNLP/TransformerTTS.git
+cd TransformerTTS
+pip install -e .
+```
 
 ## Dataset
+
 You can directly use [LJSpeech](https://keithito.com/LJ-Speech-Dataset/) to create the training dataset.
 
-#### Configuration
-* If training on LJSpeech, or if unsure, simply use ```config/session_paths.yaml``` to create [MelGAN](https://github.com/seungwonpark/melgan) compatible models
-    * swap ```data_config.yaml``` for ```data_config_wavernn.yaml``` to create models compatible with [WaveRNN](https://github.com/fatchord/WaveRNN) 
-* **EDIT PATHS**: in `config/session_paths.yaml` edit the paths to point at your dataset and log folders
+### Configuration
 
-#### Custom dataset
+- If training on LJSpeech, or if unsure, simply use `config/training_config.yaml` to
+  create [MelGAN](https://github.com/seungwonpark/melgan) or [HiFiGAN](https://github.com/jik876/hifi-gan) compatible
+  models
+- Use the command line flags to specify dataset location and where preprocessed data, logs and model files should be
+  saved. Information about configuration flags can be seen with the `-h` flag of each script.
+
+### Custom dataset
+
 Prepare a folder containing your metadata and wav files, for instance
+
+```text
+dataset_folder/
+├── metadata.csv
+└── wavs/
+    ├── file_1.wav
+    ├── ...
+    └── file_n.wav
 ```
-|- dataset_folder/
-|   |- metadata.csv
-|   |- wavs/
-|       |- file1.wav
-|       |- ...
-```
+
 if `metadata.csv` has the following format
-``` wav_file_name|transcription ```
-you can use the ljspeech preprocessor in ```data/metadata_readers.py```, otherwise add your own under the same file.
+`wav_file_name|transcription` or `wav_file_name|transcription|speaker_id`
+you can use the ljspeech preprocessor in `data/metadata_readers.py`, otherwise add your own under the same file.
 
 Make sure that:
- -  the metadata reader function name is the same as ```data_name``` field in ```session_paths.yaml```.
- -  the metadata file (can be anything) is specified under ```metadata_path``` in ```session_paths.yaml``` 
+
+- the metadata reader function name is the same as `metadata_reader` field in `training_config.yaml`.
+- the metadata file (can be anything) is specified under `metadata_path` in `training_config.yaml`
+- for multispeaker training, review the `multispeaker` and `n_speakers` values.
+- to disable phonemization, edit the `text_settings` section of the configuration file.
 
 ## Training
-Change the ```--config``` argument based on the configuration of your choice.
-### Train Aligner Model
-#### Create training dataset
-```bash
-python create_training_data.py --config config/session_paths.yaml
-```
-This will populate the training data directory (default `transformer_tts_data.ljspeech`).
-#### Training
-```bash
-python train_aligner.py --config config/session_paths.yaml
-```
-### Train TTS Model
-#### Compute alignment dataset
-First use the aligner model to create the durations dataset
-```bash
-python extract_durations.py --config config/session_paths.yaml
-```
-this will add the `durations.<session name>` as well as the char-wise pitch folders to the training data directory.
-#### Training
-```bash
-python train_tts.py --config config/session_paths.yaml
-```
-#### Training & Model configuration
-- Training and model settings can be configured in `<model>_config.yaml`
 
-#### Resume or restart training
-- To resume training simply use the same configuration files
-- To restart training, delete the weights and/or the logs from the logs folder with the training flag `--reset_dir` (both) or `--reset_logs`, `--reset_weights`
+Change the `--config` argument based on the configuration of your choice.
+
+### Model training
+
+```bash
+transformer-tts train \
+    --config $CONFIG_FILE_PATH \
+    --save-directory $MODEL_PATH \
+    --mel-directory $DATA_PATH/mels \
+    --pitch-directory $DATA_PATH/pitch \
+    --duration-directory $DATA_PATH/durations \
+    --character-pitch-directory $DATA_PATH/char-pitch \
+    --test-files $TEST_FILES
+```
+
+To resume training, simply use the same command with the same configuration and model path.
+Training and model settings can be configured in `training_config.yaml`
 
 #### Monitor training
+
 ```bash
-tensorboard --logdir /logs/directory/
+tensorboard --logdir $MODEL_PATH/logs
 ```
 
-![Tensorboard Demo](https://raw.githubusercontent.com/as-ideas/TransformerTTS/master/docs/tboard_demo.gif)
-#### Checkpoint to hdf5 weights \[optional\]
-You can convert the checkpoint files to hdf5 model weights by running
+### Extract model weights
+
 ```bash
-python checkpoints_to_weights.py --config config/session_paths.yaml
+transformer-tts save_model \
+    --config $CONFIG_FILE_PATH \
+    --save-directory $MODEL_PATH \
+    --checkpoint-path $CHECKPOINT_PATH \
+    --target-dir $WEIGHTS_PATH
 ```
+
+The model will be saved as a `mdl.keras` file in the specified target directory. If no target directory is specified, the weights will be saved in the model root directory. If no checkpoint path is specified, the latest checkpoint will be used.
+
 ## Prediction
-### With training checkpoints
-From command line with
-```commandline
-python predict_tts.py -t "Please, say something." --config config/session_paths.yaml
+
+Prediction can be done using the `transformer-tts predict`, for the full specification, check the help flag of the command.
+
+```bash
+transformer-tts predict -h
 ```
-Or in a python script
+
+Alternatively, to use the model in your own code, you can load the model directly in your code:
+
 ```python
-from utils.config_manager import Config
-from data.audio import Audio
+import tensorflow as tf
+from transformer_tts.model import ForwardTransformer
+model = tf.keras.models.load_model(
+    "mdl.keras",
+    custom_objects={"ForwardTransformer": ForwardTransformer})
 
-config_loader = Config(config_path=f'config/session_paths.yaml')
-audio = Audio(config_loader.config)
-model = config_loader.load_model() # optional: can specify checkpoint name
-out = model.predict('Please, say something.')
-
-# Convert spectrogram to wav (with griffin lim)
-wav = audio.reconstruct_waveform(out['mel'].numpy().T)
+tts_out = model.predict(sentence, speed_regulator=speed, speaker_id=speaker_id)
+mel_spec = tts_out["mel"].numpy().T
 ```
-### With model weights
-From command line with
-```commandline
-python predict_tts.py -t "Please, say something." -c config/session_paths.yaml -w path/to/model_weights.hdf5
-```
-Or in a python script
-```python
-from data.audio import Audio
-from model.factory import tts_custom
 
-model, config = tts_custom(config_path='path/to/config.yaml', 
-                           weights_path='path/to/weights.hdf5')
-audio = Audio(config)
-out = model.predict('Please, say something.')
-
-# Convert spectrogram to wav (with griffin lim)
-wav = audio.reconstruct_waveform(out['mel'].numpy().T)
-```
 ## Model Weights
 
-| Model URL | Commit | Vocoder Commit|
-|---|---|---|
-|[ljspeech_tts_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/ljspeech_weights_tts.zip) (latest) | 0cd7d33 | aca5990 |
-|[ljspeech_melgan_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_melgan_forward_transformer.zip)| 1c1cb03| aca5990 |
-|[ljspeech_melgan_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_melgan_autoregressive_transformer.zip)| 1c1cb03| aca5990 |
-|[ljspeech_wavernn_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_wavernn_forward_transformer.zip)| 1c1cb03| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_wavernn_autoregressive_transformer.zip)| 1c1cb03| 3595219 |
-|[ljspeech_wavernn_forward_model](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_forward_transformer.zip)| d9ccee6| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v2](https://public-asai-dl-models.s3.eu-central-1.amazonaws.com/TransformerTTS/ljspeech_autoregressive_transformer.zip)| d9ccee6| 3595219 |
-|[ljspeech_wavernn_autoregressive_model_v1](https://github.com/as-ideas/tts_model_outputs/tree/master/ljspeech_transformertts)| 2f3a1b5| 3595219 |
+Newer models are added to the [Releases](https://github.com/TartuNLP/TransformerTTS/releases) of this repository.
+
 ## Maintainers
-* Francesco Cardinale, github: [cfrancesco](https://github.com/cfrancesco)
+
+[TartuNLP](https://tartunlp.ai) - the NLP research group at the University of Tartu.
 
 ## Special thanks
-[MelGAN](https://github.com/seungwonpark/melgan) and [WaveRNN](https://github.com/fatchord/WaveRNN): data normalization and samples' vocoders are from these repos.
+
+[Francesco Cardinale](https://github.com/cfrancesco) from Axel Springer for the original implementation.
+
+[MelGAN](https://github.com/seungwonpark/melgan) and [WaveRNN](https://github.com/fatchord/WaveRNN): data normalization
+and samples' vocoders are from these repos.
 
 [Erogol](https://github.com/erogol) and the Mozilla TTS team for the lively exchange on the topic.
 
-
 ## Copyright
+
 See [LICENSE](LICENSE) for details.
